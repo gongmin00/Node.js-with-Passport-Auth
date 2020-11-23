@@ -5,8 +5,6 @@ const bodyParser = require("body-parser")
 const User = require('../model/user.js')
 const bcrypt = require("bcryptjs")
 
-app.set('views', "../views")
-app.set('view engin', "pug")
 
 const jsonParser = bodyParser.json()
 //create a json parser
@@ -46,10 +44,9 @@ router.post('/signup', urlencodeed, function(req, res){
             email: email,
             password,
             password2
+            //以上两种写法都可以传递数据
         })
-    }
-    //以上两种写法都可以传递数据
-    else {
+    } else {
         User.findOne({email:email})
         .then(user=>{
             if (user) {
@@ -77,8 +74,9 @@ router.post('/signup', urlencodeed, function(req, res){
                          newUser.password = hash
                          //set password to hashed
                          newUser.save().then(user=>{
+                            req.flash('successMsg','you are now registered and please login')
                             res.redirect('/user/login')
-                            console.log("we successfully save new user to database")
+                            console.log(successMsg)
                          }).catch(err=>console.log(err))
                          //save newUser data to mongodb atlas
                     })
@@ -90,9 +88,8 @@ router.post('/signup', urlencodeed, function(req, res){
 })
 //user/signup handler
 
-router.get('login', function(req, res){
-    console.log()
-    res.send("welcome to login page")
+router.get('/login', function(req, res){
+    res.render('login.pug')
 })
 
 router.get('/:id', function(req, res){

@@ -4,15 +4,10 @@ const app = express()
 const userRouter = require("./routers/user")
 //router level middleware
 const mongoose = require ('mongoose')
-
 const db = require('./config/keys').mongoURI
 //mongo db config
-
-mongoose.connect(db,{ useNewUrlParser: true })
-    .then(()=>console.log('mongoDB connect'))
-    .catch(()=>console.log('err'))
-
-
+const session = require('express-session')
+const flash = require('connect-flash')
 // mongoose.connect('mongodb://localhost/database1', { useNewUrlParser: true })
 // //connect to database and database name is database1
 
@@ -28,13 +23,33 @@ mongoose.connect(db,{ useNewUrlParser: true })
 app.set('views', "./views")
 app.set('view engin', "pug")
 
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+}))
+//express-session middleware
 
+app.use(flash())
+//connect-flash middleware
+
+app.use(function(req, res, next){
+    res.locals.successMsg =req.flash('successMsg').toString()
+    res.locals.errorMsg =req.flash('errorMsg').toString()
+    next()
+})
+//Global variables
+
+app.use('/user', userRouter)
+//router middleware
 app.get('/', function(req, res){
     res.render('home.pug', {message: "this is home page"})
 })
-app.use('/user', userRouter)
 
 
+mongoose.connect(db,{ useNewUrlParser: true })
+    .then(()=>console.log('mongoDB connect'))
+    .catch(()=>console.log('err'))
 
 app.listen(3000)
 //listen to port 3000

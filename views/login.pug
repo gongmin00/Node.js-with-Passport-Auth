@@ -3,3 +3,14 @@ html
         title Express Signup Page
     body
         h1 this is login page
+        h2 #{successMsg}
+        form(action="/user/login " method="POST")
+            div(style={margin:"auto auto"})
+                label(for="username") User name
+                input(type="text", value="", name="username", required="require")
+            
+                label(for="password") Password
+                input(type="password", value="", name="password")
+               
+                br
+                input(type="submit", value="Login")
