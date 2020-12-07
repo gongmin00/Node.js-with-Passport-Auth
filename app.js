@@ -8,6 +8,10 @@ const db = require('./config/keys').mongoURI
 //mongo db config
 const session = require('express-session')
 const flash = require('connect-flash')
+const passport = require('passport')
+require('./config/passport')(passport)
+//bring in passport to config
+
 // mongoose.connect('mongodb://localhost/database1', { useNewUrlParser: true })
 // //connect to database and database name is database1
 
@@ -30,12 +34,16 @@ app.use(session({
 }))
 //express-session middleware
 
+app.use(passport.initialize())
+app.use(passport.session())
+//passport middleware, put them after session
+
 app.use(flash())
 //connect-flash middleware
 
 app.use(function(req, res, next){
     res.locals.successMsg =req.flash('successMsg').toString()
-    res.locals.errorMsg =req.flash('errorMsg').toString()
+    res.locals.errorMsg =req.flash('errorMsg')
     next()
 })
 //Global variables

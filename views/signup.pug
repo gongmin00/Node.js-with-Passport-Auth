@@ -6,14 +6,12 @@ html
     body
         h1.title This is a simple SignUp App
         h2(style={color:'green'}) Please sign up first
-        p #{password}
         script.
             var error = !{errorMsg}
             if (typeof(error)!=="undefined") 
                 error.map(function(item){
                     document.write(item.msg)
                 })
-
         form(action="/user/signup " method="POST")
             div(style={margin:"auto auto"})
                 label(for="username") User name

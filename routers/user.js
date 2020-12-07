@@ -47,6 +47,7 @@ router.post('/signup', urlencodeed, function(req, res){
             //以上两种写法都可以传递数据
         })
     } else {
+        //the first email here for findOne refers to schema Typel in user model
         User.findOne({email:email})
         .then(user=>{
             if (user) {
@@ -76,7 +77,6 @@ router.post('/signup', urlencodeed, function(req, res){
                          newUser.save().then(user=>{
                             req.flash('successMsg','you are now registered and please login')
                             res.redirect('/user/login')
-                            console.log(successMsg)
                          }).catch(err=>console.log(err))
                          //save newUser data to mongodb atlas
                     })
