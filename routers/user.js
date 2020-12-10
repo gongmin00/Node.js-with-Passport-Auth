@@ -4,6 +4,7 @@ const router = express.Router()
 const bodyParser = require("body-parser")
 const User = require('../model/user.js')
 const bcrypt = require("bcryptjs")
+const passport = require('passport')
 
 
 const jsonParser = bodyParser.json()
@@ -92,6 +93,21 @@ router.get('/login', function(req, res){
     res.render('login.pug')
 })
 
+router.post('/login',urlencodeed, (req, res, next)=>{
+    console.log(req.flash('error'))
+    passport.authenticate('local', {
+        successRedirect:'/dashboard',
+        failureRedirect:'/user/login',
+        failureFlash: true
+    })(req,res,next)
+})
+// router.post('/login', (req, res, next) => {
+//     passport.authenticate('local', {
+//       successRedirect: '/dashboard',
+//       failureRedirect: '/user/login',
+//       failureFlash: true
+//     })(req, res, next);
+//   });
 router.get('/:id', function(req, res){
     const id = req.params.id
     res.send(id)

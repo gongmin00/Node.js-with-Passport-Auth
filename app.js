@@ -42,8 +42,9 @@ app.use(flash())
 //connect-flash middleware
 
 app.use(function(req, res, next){
-    res.locals.successMsg =req.flash('successMsg').toString()
+    res.locals.successMsg =req.flash('successMsg')
     res.locals.errorMsg =req.flash('errorMsg')
+    res.locals.error =req.flash('error')
     next()
 })
 //Global variables

@@ -6,17 +6,24 @@ html
         
         script.
             function removeMsg() {
-                var removeItem = document.getElementById('success-msg')
-                removeItem.remove()
+                var removeItem = document.getElementsByClassName('msg')
+                if (removeItem.length>0) {
+                    removeItem[0].remove()
+                }
+                
             }
-        div
-            h2(id="success-msg") #{successMsg}
-                button(onclick='removeMsg()') x
-        
+        if (successMsg !=='')
+            div(class="msg")
+                h2 #{successMsg}
+                    button(onclick='removeMsg()') x
+        if (error !=='')
+            div(class="msg")
+                h2 #{error}
+                    button(onclick='removeMsg()') x
         form(action="/user/login " method="POST")
             div(style={margin:"auto auto"})
-                label(for="username") User name
-                input(type="text", value="", name="username", required="require")
+                label(for="email") Email
+                input(type="text", value="", name="email", required="require")
                 label(for="password") Password
                 input(type="password", value="", name="password")
                 br
