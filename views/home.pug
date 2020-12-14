@@ -5,9 +5,11 @@ html
             include style.css
     body
         .title-container
-            h1.title Welcome to Node.js Learning App
+            h1.title Welcome to Node.js Authentication App
             h2.title Please signup or login to App
         .button-container
-            button.button-box Register
-            button.button-box Login
+            button.button-box 
+                a.button-link(href="/user/signup") Register
+            button.button-box 
+                a.button-link(href="/user/login") Login
 

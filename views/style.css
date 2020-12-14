@@ -31,3 +31,7 @@ body {
 .button-box > a {
     border: none;
 }
+.button-link {
+    text-decoration: none;
+    color:#ff5722;
+}
