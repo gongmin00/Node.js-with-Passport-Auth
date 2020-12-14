@@ -1,7 +1,33 @@
+body {
+    background:#b75c5c;
+}
+.title-container {
+    margin-top: 10vw;
+}
+
 .title {
-    color: red;
+    color: beige;
     text-align: center;
 }
-.input-box {
-    height: 100px;
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-container > .input-box {
+    width: 15vw;
+    height: 3vw;
+    margin: 1vw auto;
+}
+.button-container {
+    margin-top: 5vw;
+    text-align: center;
+}
+.button-box {
+    width: 10vw;
+    height: 3vw;
+    border-radius: 30.5px;
+}
+.button-box > a {
+    border: none;
 }

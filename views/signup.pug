@@ -1,11 +1,13 @@
 html
     head
         title Express Signup Page
-        link(rel='stylesheet' href="style.css")
+        style
+            include style.css
         
     body
-        h1.title This is a simple SignUp App
-        h2(style={color:'green'}) Please sign up first
+        .title-container
+            h1.title This is a simple SignUp App
+            h2.title Please sign up first
         script.
             var error = !{errorMsg}
             if (typeof(error)!=="undefined") 
@@ -13,16 +15,17 @@ html
                     document.write(item.msg)
                 })
         form(action="/user/signup " method="POST")
-            div(style={margin:"auto auto"})
-                label(for="username") User name
-                input(type="text", value="", name="username", required="require")
-                label(for="email") Email
-                input(type="text", value="", name="email")
-                label(for="password") Password
-                input(type="password", value="", name="password")
-                label(for="verified password    ") Verified password
-                input(type="password", value="", name="password2")
+            .form-container
+                label.title(for="username") User name
+                input.input-box(type="text", value="", name="username", required="require")
+                label.title(for="email") Email
+                input.input-box(type="text", value="", name="email")
+                label.title(for="password") Password
+                input.input-box(type="password", value="", name="password")
+                label.title(for="verified password    ") Verified password
+                input.input-box(type="password", value="", name="password2")
                 br
-                input(type="submit", value="Submit")
+                .button-container
+                    input.button-box(type="submit", value="Submit")
 
         

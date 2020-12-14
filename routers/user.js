@@ -1,5 +1,4 @@
 const express = require('express')
-const app = express()
 const router = express.Router()
 const bodyParser = require("body-parser")
 const User = require('../model/user.js')
@@ -94,20 +93,20 @@ router.get('/login', function(req, res){
 })
 
 router.post('/login',urlencodeed, (req, res, next)=>{
-    console.log(req.flash('error'))
     passport.authenticate('local', {
         successRedirect:'/dashboard',
         failureRedirect:'/user/login',
         failureFlash: true
     })(req,res,next)
 })
-// router.post('/login', (req, res, next) => {
-//     passport.authenticate('local', {
-//       successRedirect: '/dashboard',
-//       failureRedirect: '/user/login',
-//       failureFlash: true
-//     })(req, res, next);
-//   });
+//need body-parser to display flash message
+
+router.get('/logout', (req,res)=>{
+    req.logout()
+    req.flash('successMsg', "You are logged out now")
+    res.redirect('/user/login')
+})
+
 router.get('/:id', function(req, res){
     const id = req.params.id
     res.send(id)

@@ -19,13 +19,13 @@ const Passport = function (passport) {
                         return done(null, false, {message:'this email is not registered'})
                     } 
                     //the first passport is plain passport input, user.passport is bcrypt passport in mongoose
-                    bcrypt.compare(passport, user.passport, (err, isMatch)=>{
-                        if (err) console.log(err)
+                    bcrypt.compare(password, user.password, (err, isMatch)=>{
+                        if (err) throw err
                         //isMatch is a boolean
                         if (isMatch) {
                             return done(null, user)
                         } else {
-                            return done(null, false, {message:'password is not correct'})
+                            return done(null, false, {message:'the password is not correct'})
                         }
                     })
                 })

@@ -1,9 +1,13 @@
 html
     head
         title express title
-    body(style={background:"#b75c5c"})
-        h1.title Welcome back to Node.js Learning App
-        h2 You are login right now
-        button Register
-        button Login
+        style   
+            include style.css
+    body
+        .title-container
+            h1.title Welcome back to Node.js Learning App, #{name}
+            h2.title You are login right now
+        .button-container
+            button.button-box    
+                a(class='button-logout' href='/user/logout') Logout
 

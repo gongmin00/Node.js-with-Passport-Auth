@@ -3,6 +3,7 @@ const app = express()
 // create express application
 const userRouter = require("./routers/user")
 //router level middleware
+const dashboardRouter = require('./routers/index')
 const mongoose = require ('mongoose')
 const db = require('./config/keys').mongoURI
 //mongo db config
@@ -50,6 +51,7 @@ app.use(function(req, res, next){
 //Global variables
 
 app.use('/user', userRouter)
+app.use('/', dashboardRouter)
 //router middleware
 app.get('/', function(req, res){
     res.render('home.pug', {message: "this is home page"})

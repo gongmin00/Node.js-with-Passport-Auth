@@ -1,8 +1,11 @@
 html
     head
         title Express Signup Page
+        style   
+            include style.css
     body
-        h1 this is login page
+        .title-container
+            h1.title this is login page
         
         script.
             function removeMsg() {
@@ -14,17 +17,19 @@ html
             }
         if (successMsg !=='')
             div(class="msg")
-                h2 #{successMsg}
+                h2.title #{successMsg}
                     button(onclick='removeMsg()') x
         if (error !=='')
             div(class="msg")
-                h2 #{error}
+                h2.title #{error}
                     button(onclick='removeMsg()') x
         form(action="/user/login " method="POST")
-            div(style={margin:"auto auto"})
-                label(for="email") Email
-                input(type="text", value="", name="email", required="require")
-                label(for="password") Password
-                input(type="password", value="", name="password")
+            .form-container
+                label.title(for="email") Email
+                input.input-box(type="text", value="", name="email", required="require")
                 br
-                input(type="submit", value="Login")
+                label.title(for="password") Password
+                input.input-box(type="password", value="", name="password")
+                br
+                .button-container
+                    input.button-box(type="submit", value="Login")
